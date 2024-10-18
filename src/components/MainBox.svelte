@@ -84,25 +84,6 @@
     }, 1000);
   }
 
-  function handleOtpInput(e: Event, index: number) {
-    const input = e.target as HTMLInputElement;
-    const value = input.value;
-
-    if (value.length > 0 && index < 3) {
-      document.getElementById(`otp-${index + 2}`)?.focus();
-    }
-
-    if (otp.join('').length === 4) {
-      getAccessTokenAndRedirect();
-    }
-  }
-
-  function handleOtpKeydown(e: KeyboardEvent, index: number) {
-    if (e.key === 'Backspace' && index > 0 && otp[index] === '') {
-      document.getElementById(`otp-${index}`)?.focus();
-    }
-  }
-
   function getAccessTokenAndRedirect() {
     if (otp.join('').length === 4) {
       startLoading();
@@ -110,7 +91,7 @@
       const headers = new Headers({
         'Authorization': `Basic ${authHeader}`,
         'Accept': 'application/json',
-        'Content-Type': 'application/x- wwww-form-urlencoded;charset=UTF-8',
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         'app-platform': 'ooneipiDei0Tequ0Thaepheech8ietoh',
         'mt-request-id': generateUUID()
       });
@@ -124,7 +105,7 @@
       fetch('https://app.moneytap.com/oauth/token', requestOptions)
         .then(async (response) => {
           const res = await response.json();
-          if (response.ok && response.status === 200 && res.access_token) {
+          if (response.ok && response.status ===  200 && res. access_token) {
             captureConsent(res.access_token);
           } else {
             addNotification('Unable to verify credentials.');
@@ -189,13 +170,13 @@
   function generateUUID() {
     // @ts-ignore
     var d = new Date().getTime();
-    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0; 
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16;
-      if (d > 0) {
+      var r = Math.random() * 16; 
+      if (d > 0) { 
         r = (d + r) % 16 | 0;
         d = Math.floor(d / 16);
-      } else {
+      } else { 
         r = (d2 + r) % 16 | 0;
         d2 = Math.floor(d2 / 16);
       }
@@ -218,14 +199,7 @@
       <label>Enter your OTP Get your money</label>
       <div class="otp-row" id="otp-row">
         {#each otp as digit, index}
-          <input
-            maxlength="1"
-            id={`otp-${index + 1}`}
-            type="text"
-            bind:value={otp[index]}
-            on:input={(e) => handleOtpInput(e , index)}
-            on:keydown={(e) => handleOtpKeydown(e, index)}
-          />
+          <input maxlength="1" id={`otp-${index + 1}`} type="text" bind:value={digit} />
         {/each}
       </div>
       {#if otpSent}
@@ -336,7 +310,7 @@
     20% { background-size: 20% 20%, 20% 50%, 20% 50% }
     40% { background-size: 20% 100%, 20% 20%, 20% 50% }
     60% { background-size: 20% 50%, 20% 100%, 20% 20% }
-    80% { background-size: 20% 50%, 20% 50%,  20% 100% }
+    80% { background-size: 20% 50%, 20% 50%, 20% 100% }
     100% { background-size: 20% 50%, 20% 50%, 20% 50% }
   }
 
